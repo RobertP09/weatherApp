@@ -1,0 +1,12 @@
+@import 'colors.scss';
+//Defaults for Card
+.card {
+    background: $cardBackground;
+    color: $cardFont;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    margin:0 8px;
+    max-height: 475px;
+    max-width: 315px;
+}
