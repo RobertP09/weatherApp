@@ -25,7 +25,7 @@
   margin: 0;
 }
 
-.card .forecastText .generalWeather,
+.card .forecastText .summary,
 .card .forecastText .temperature {
   font-size: 1.6rem;
   font-weight: 500;

@@ -1,6 +1,9 @@
 window.addEventListener('load', () => {
     let lat;
     let long;
+    const temperatureDegree = document.querySelector('.temperature');
+    const weatherSummary = document.querySelector('.summary');
+    const iconImage = document.querySelector('.icon');
 
     if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
@@ -15,7 +18,11 @@ window.addEventListener('load', () => {
                 })
                 .then(data => {
                     console.log(data);
-                    const { temperature, summary } = data.currently;
+                    const { temperature, summary , icon} = data.currently;
+                    //Set DOM elements from the api
+                    weatherSummary.textContent = summary;
+                    temperatureDegree.textContent = `${temperature} degrees`;
+
                 })   
             });
         }
