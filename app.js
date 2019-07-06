@@ -3,6 +3,7 @@ window.addEventListener('load', () => {
     let long;
     const temperatureDegree = document.querySelector('.temperature');
     const weatherSummary = document.querySelector('.summary');
+    const dayOfTheWeek = document.querySelector('.day');
     const iconImage = document.querySelector('.icon');
 
     //Setting location based on user allowing us to use their location
@@ -21,14 +22,14 @@ window.addEventListener('load', () => {
                 .then(response => {
                         return response.json();
                 })
-                .then(data => {
-                    //Logging data so we can work with it
-                    console.log(data);
+                .then(weatherData => {
+                    //Logging weatherData so we can work with it
+                    console.log(weatherData);
                     //Taking portions of the API
-                    const { temperature, summary , icon} = data.currently;
+                    const { temperature, summary , icon} = weatherData.currently;
                     //Set DOM elements from the api
                     weatherSummary.textContent = summary;
-                    temperatureDegree.textContent = `${temperature} degrees`;
+                    temperatureDegree.textContent = Math.floor(temperature);
 
                     //Set icon based on icon info from API
                     if(icon === "cloudy" ||  "partly-cloudy-day" ||  "partly-cloudy-night"  ) {
@@ -36,6 +37,23 @@ window.addEventListener('load', () => {
                     } else if (icon === "clear-day"){
                         iconImage.src="./img/001-sun.svg";
                     }
+                    // Declaring array to hold days data
+                    let weekdays =[];
+                    // 5 Day Forecast
+                    const { data } = weatherData.daily
+                    for(days in data ){
+                        //move data into weekdays array
+                        weekdays.push(days);
+                    }
+                    let daysOfWeek = new Map();
+                        daysOfWeek.set(0,"Sunday");
+                        daysOfWeek.set(1,"Monday");
+                        daysOfWeek.set(2,"Tuesday");
+                        daysOfWeek.set(3,"Wednesday");
+                        daysOfWeek.set(4,"Thursday");
+                        daysOfWeek.set(5,"Friday");
+                        daysOfWeek.set(6,"Saturday");
+                    
                 })
             });
         }
